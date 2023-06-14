@@ -20,14 +20,12 @@ namespace MyDarkMaterial.Controllers
         {
             if (!String.IsNullOrEmpty(url))
             {
-                using (var httpClient = CreateHttpClient())
-                {
-                    var responseMessage = await ForwardRequest(httpClient, Request, url);
+                using var httpClient = CreateHttpClient();
+                var responseMessage = await ForwardRequest(httpClient, Request, url);
 
-                    CopyResponseHeaders(responseMessage, Response);
+                CopyResponseHeaders(responseMessage, Response);
 
-                    await WriteResponse(Request, url, responseMessage, Response, false);
-                }
+                await WriteResponse(Request, url, responseMessage, Response, false);
             }
         }
 
